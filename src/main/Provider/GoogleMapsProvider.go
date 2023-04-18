@@ -9,8 +9,8 @@ import (
 
 func main() {
 	// Set up the API endpoint and parameters
-	origin := "Nelson,UK"
-	destination := "9 Calico Close,UK"
+	origin := "Manchester,UK"
+	destination := "London,UK"
 	apiKey := "" // Replace with your actual Google Maps API key
 	url := fmt.Sprintf("https://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&key=%s", origin, destination, apiKey)
 
