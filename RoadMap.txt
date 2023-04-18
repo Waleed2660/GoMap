@@ -1,0 +1,40 @@
+Creating a Go application that takes a list of destinations from a user and builds a route using the Google Maps API involves several steps.
+
+										Here's a high-level overview of the process:
+
+1. Obtain a Google Maps API key: To use the Google Maps API, you need to obtain an API key from the Google Cloud Platform (GCP) Console. 
+	Follow the documentation provided by Google to create a project, enable the Google Maps JavaScript API, and generate an API key.
+
+2. Set up a Go project: Create a new Go project and set up your Go environment. You can use a Go package manager like go mod to manage 
+	dependencies and package your application.
+
+3. Import the necessary Go libraries: Import the necessary Go libraries in your project to interact with the Google Maps API. 
+	You can use a library like google maps or go-maps to interact with the Google Maps API using Go. These libraries provide functions
+	and structs to communicate with the Google Maps API and handle responses.
+
+4. Implement the logic for taking user input: Create a user interface in your Go application to allow users to input a list of destinations. 
+	This could be a web form, a command-line interface, or any other appropriate method based on the type of application you're building. 
+	Collect the user input and pass it to the Google Maps API for routing.
+
+5. Make requests to the Google Maps API: Use the Google Maps API key obtained earlier to authenticate and authorize your requests. 
+	Use the functions provided by the Go libraries to make requests to the Google Maps API with the user's input, such as origin, 
+	destination, and mode of transportation.
+
+6. Process the API response: Handle the response from the Google Maps API in your Go application. Parse the response to extract the relevant 
+	information, such as the route details, distance, duration, etc.
+
+7. Build the route: Based on the response from the Google Maps API, build the route using the waypoints provided by the user. 
+	You can use the routing information to display the route on a map, generate directions, or perform other actions as needed.
+
+8. Display the results: Finally, display the results to the user in an appropriate format, such as a map view, list of directions, 
+	or any other desired output.
+
+9. Handle errors: Don't forget to handle errors that may occur during the process, such as API errors, network errors, 
+	or user input validation errors. Make sure to provide appropriate error messages and handle exceptions gracefully in your Go application.
+
+
+
+This is a high-level overview of how you can create a Go application that takes a list of destinations from a user and builds a route 
+using the Google Maps API. The actual implementation details may vary depending on the specific requirements of your application, 
+the Go libraries you choose to use, and the user interface you create. Make sure to refer to the documentation of the Google Maps API 
+and the Go libraries you use for more detailed implementation guidance.
