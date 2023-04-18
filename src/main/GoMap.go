@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/Waleed2660/GoMap/src/main/Gateway"
 	"github.com/Waleed2660/GoMap/src/main/Helper"
 	"os"
 )
@@ -14,4 +15,8 @@ func main() {
 		os.Exit(1)
 	}
 
+	inboundGateway := Gateway.NewInboundGateway()
+	inboundGateway.Run()
+
+	fmt.Println("GoMap is running")
 }
