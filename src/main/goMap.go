@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"main/src/main/Helper"
+	"github.com/Waleed2660/GoMap/src/main/Helper"
 	"os"
 )
 
