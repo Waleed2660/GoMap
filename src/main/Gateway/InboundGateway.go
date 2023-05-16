@@ -1,6 +1,7 @@
 package Gateway
 
 import (
+	"github.com/Waleed2660/GoMap/src/main/Google"
 	"github.com/Waleed2660/GoMap/src/main/Helper"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -33,6 +34,16 @@ func (c *InboundGateway) getApiKey(ctx *gin.Context) {
 	}
 }
 
+// getDirection endpoint returns the direction
+func (c *InboundGateway) getDirection(ctx *gin.Context) {
+	// Gets the API key from handler
+	placeID, err := Google.GetPlaceID("19SansburyCrescentNelsonBB98JQ")
+	if err == nil {
+		ctx.Header("Content-Type", "text/plain")
+		ctx.String(http.StatusOK, "PlaceID: %s", placeID)
+	}
+}
+
 // Run starts the HTTP server and registers the controller to handle incoming requests
 func (c *InboundGateway) Run() {
 	// Initialize Gin router
@@ -41,6 +52,7 @@ func (c *InboundGateway) Run() {
 	// Define routes and associate them with handler functions
 	router.GET("/healthcheck", c.healthCheck)
 	router.GET("/key", c.getApiKey)
+	router.GET("/direction", c.getDirection)
 
 	// Start the HTTP server and listen for incoming requests on port 8080
 	log.Println("Starting HTTP server on :8080...")

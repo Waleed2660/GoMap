@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Autocomplete Address using Google API</title>
+<!--    <script src="https://maps.googleapis.com/maps/api/js?key= &libraries=places&async&defer"></script>-->
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function autocompleteAddress() {
+            var input = document.getElementById("search-input");
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+            autocomplete.addListener("place_changed", function() {
+                var place = autocomplete.getPlace();
+                if (place.geometry) {
+                    var lat = place.geometry.location.lat();
+                    var lng = place.geometry.location.lng();
+                    var address = place.formatted_address;
+                    $.get("/autocomplete?address=" + address + "&lat=" + lat + "&lng=" + lng, function(data) {
+                        $("#results-list").html(data);
+                    });
+                }
+            });
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #search-bar {
+            margin: 20px auto;
+            width: 600px;
+            text-align: center;
+        }
+
+        #search-input {
+            font-size: 16px;
+            padding: 10px;
+            width: 400px;
+        }
+
+        #search-btn {
+            background-color: #333;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px;
+        }
+
+        #results {
+            margin: 0 auto;
+            width: 600px;
+        }
+
+        #results-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #results-list li {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body onload="autocompleteAddress()">
+<header>
+    <h1>Autocomplete Address using Google API</h1>
+</header>
+<div id="search-bar">
+    <input type="text" id="search-input" placeholder="Enter an address">
+    <button type="button" id="search-btn">Search</button>
+</div>
+<div id="results">
+    <ul id="results-list"></ul>
+</div>
+</body>
+</html>

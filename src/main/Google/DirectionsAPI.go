@@ -1,24 +1,29 @@
-package Provider
+package Google
 
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/Waleed2660/GoMap/src/main/Helper"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 )
 
-func main() {
+func GetDirection() (string, error) {
 	// Set up the API endpoint and parameters
 	origin := "Manchester,UK"
 	destination := "London,UK"
-	apiKey := "" // Replace with your actual Google Maps API key
+
+	// Replace with your actual Google Maps API key
+	apiKey, err := Helper.GetApiKey()
+
 	url := fmt.Sprintf("https://maps.googleapis.com/maps/api/directions/json?origin=%s&destination=%s&key=%s", origin, destination, apiKey)
 
 	// Send HTTP GET request to the API
 	response, err := http.Get(url)
 	if err != nil {
 		fmt.Println("Error sending request:", err)
-		return
+		return "Error sending request:", err
 	}
 	defer response.Body.Close()
 
@@ -26,7 +31,7 @@ func main() {
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		fmt.Println("Error reading response:", err)
-		return
+		return "Error reading response body", err
 	}
 
 	// Parse the JSON response
@@ -47,7 +52,7 @@ func main() {
 	if err != nil {
 		fmt.Println("Error parsing JSON response:", err)
 		fmt.Println("Response -> ", response)
-		return
+		return "Error Parsing JSON response", err
 	}
 
 	// Extract and display the duration and distance of the shortest route
@@ -59,4 +64,6 @@ func main() {
 	} else {
 		fmt.Println("No route found")
 	}
+
+	return strconv.Itoa(response.StatusCode), nil
 }
